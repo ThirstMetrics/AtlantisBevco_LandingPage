@@ -491,6 +491,8 @@ p {
   align-items: center;
   justify-content: center;
   padding: 16px;
+  background: var(--color-slate-navy);
+  border-radius: 8px;
   transition: transform var(--transition-fast);
 }
 
@@ -514,7 +516,7 @@ p {
   margin-top: 10px;
   font-size: 13px;
   font-weight: 500;
-  color: var(--color-cool-gray);
+  color: rgba(255, 255, 255, 0.7);
   text-align: center;
 }
 

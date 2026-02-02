@@ -135,17 +135,28 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  /* --- Contact Form Handling --- */
+  /* --- Contact Form Handling (mailto) --- */
   var contactForm = document.querySelector('.contact-form');
   if (contactForm) {
     contactForm.addEventListener('submit', function (e) {
-      // If using Formspree, let it handle naturally
-      // For demo/testing without Formspree, prevent default
-      var action = contactForm.getAttribute('action');
-      if (action && action.includes('YOUR_FORM_ID')) {
-        e.preventDefault();
-        alert('Contact form is not yet connected. Please configure Formspree or another form service.');
-      }
+      e.preventDefault();
+
+      var name = document.getElementById('contact-name').value.trim();
+      var company = document.getElementById('contact-company').value.trim();
+      var email = document.getElementById('contact-email').value.trim();
+      var inquiry = document.getElementById('contact-inquiry').value;
+      var message = document.getElementById('contact-message').value.trim();
+
+      var subject = encodeURIComponent(inquiry + ' - ' + name + (company ? ' (' + company + ')' : ''));
+      var body = encodeURIComponent(
+        'Name: ' + name + '\n' +
+        'Company: ' + (company || 'N/A') + '\n' +
+        'Email: ' + email + '\n' +
+        'Inquiry Type: ' + inquiry + '\n\n' +
+        message
+      );
+
+      window.location.href = 'mailto:info@atlantisbevco.com?subject=' + subject + '&body=' + body;
     });
   }
 
