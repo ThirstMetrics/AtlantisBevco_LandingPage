@@ -20,22 +20,54 @@
 
   <!-- Styles -->
   <link rel="stylesheet" href="css/style.css">
+
+  <!-- Google Analytics GA4 -->
+  <!-- Replace G-XXXXXXXXXX with your actual GA4 Measurement ID -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
 </head>
 <body>
+
+  <!-- ========== AGE VERIFICATION GATE ========== -->
+  <div id="age-gate" class="age-gate">
+    <div class="age-gate-inner">
+      <img src="images/logo-graphic.png" alt="Atlantis Bevco">
+      <h2>Age Verification</h2>
+      <p>You must be 21 years of age or older to enter this site.</p>
+      <div class="age-gate-buttons">
+        <button id="age-yes" class="btn btn-primary">I Am 21 or Older</button>
+        <button id="age-no" class="btn age-gate-deny">I Am Under 21</button>
+      </div>
+      <p class="age-gate-disclaimer">By entering this site you agree that you are of legal drinking age in your jurisdiction.</p>
+    </div>
+  </div>
+
+  <!-- ========== COOKIE CONSENT ========== -->
+  <div id="cookie-banner" class="cookie-banner hidden">
+    <p>We use cookies to improve your experience and analyze site traffic. By continuing to use this site, you consent to our use of cookies.</p>
+    <button id="cookie-accept" class="btn btn-primary">Accept</button>
+    <button id="cookie-decline" class="cookie-decline">Decline</button>
+  </div>
 
   <!-- ========== NAVIGATION ========== -->
   <nav class="navbar" role="navigation" aria-label="Main navigation">
     <div class="navbar-inner">
       <a href="index.html" class="navbar-logo">
-        <img src="images/logo.png" alt="Atlantis Bevco Distribution">
+        <img src="images/logo-graphic.png" alt="Atlantis Bevco">
+        <span class="navbar-logo-text">Atlantis Bevco</span>
       </a>
       <ul class="navbar-menu">
         <li><a href="#home">Home</a></li>
         <li><a href="#brands">Our Brands</a></li>
         <li><a href="#wine">Wine</a></li>
         <li><a href="catalog.html">Catalog</a></li>
-        <li><a href="become-a-supplier.html">Become a Supplier</a></li>
-        <li><a href="become-a-customer.html">Become a Customer</a></li>
+        <li class="nav-cta"><a href="become-a-supplier.html">Become a Supplier</a></li>
+        <li class="nav-cta"><a href="become-a-customer.html">Become a Customer</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
       <button class="hamburger" aria-label="Toggle menu" aria-expanded="false">
@@ -49,8 +81,8 @@
       <a href="#brands" role="menuitem">Our Brands</a>
       <a href="#wine" role="menuitem">Wine</a>
       <a href="catalog.html" role="menuitem">Catalog</a>
-      <a href="become-a-supplier.html" role="menuitem">Become a Supplier</a>
-      <a href="become-a-customer.html" role="menuitem">Become a Customer</a>
+      <div class="mobile-cta"><a href="become-a-supplier.html" role="menuitem">Become a Supplier</a></div>
+      <div class="mobile-cta"><a href="become-a-customer.html" role="menuitem">Become a Customer</a></div>
       <a href="#contact" role="menuitem">Contact</a>
     </div>
   </nav>
@@ -182,7 +214,7 @@
           </div>
           <!-- Andre Petit Cognac -->
           <div class="swiper-slide">
-            <a href="#" class="brand-card" target="_blank" rel="noopener">
+            <a href="andre-petit.html" class="brand-card">
               <img src="images/brands/andre-petit.png" alt="Andre Petit Cognac">
               <span class="brand-name">Andre Petit Cognac</span>
             </a>
@@ -197,7 +229,7 @@
           <!-- Alain Voge -->
           <div class="swiper-slide">
             <a href="https://www.alain-voge.com/" class="brand-card" target="_blank" rel="noopener">
-              <img src="images/brands/alain-voge.png" alt="Alain Voge Cornas">
+              <img src="images/brands/alain-voge.svg" alt="Alain Voge Cornas">
               <span class="brand-name">Alain Voge Cornas</span>
             </a>
           </div>
@@ -252,7 +284,7 @@
           </div>
           <!-- Rose Sil Vous Plait -->
           <div class="swiper-slide">
-            <a href="#" class="brand-card" target="_blank" rel="noopener">
+            <a href="https://rosesvp.com/" class="brand-card" target="_blank" rel="noopener">
               <img src="images/brands/rose-svp.png" alt="Rose Sil Vous Plait">
               <span class="brand-name">Rose Sil Vous Plait</span>
             </a>
@@ -313,11 +345,18 @@
               <span class="brand-name">Bradshaw Bourbon</span>
             </a>
           </div>
-          <!-- Bad Bear -->
+          <!-- Iowa Legendary Rye -->
           <div class="swiper-slide">
-            <a href="#" class="brand-card" target="_blank" rel="noopener">
-              <img src="images/brands/bad-bear.png" alt="Bad Bear Enterprise">
-              <span class="brand-name">Bad Bear Enterprise</span>
+            <a href="https://sextros.com/" class="brand-card" target="_blank" rel="noopener">
+              <img src="images/brands/iowa-legendary-rye.png" alt="Iowa Legendary Rye">
+              <span class="brand-name">Iowa Legendary Rye</span>
+            </a>
+          </div>
+          <!-- Sextro Rye -->
+          <div class="swiper-slide">
+            <a href="https://sextros.com/" class="brand-card" target="_blank" rel="noopener">
+              <img src="images/brands/sextro-rye.png" alt="Sextro Rye">
+              <span class="brand-name">Sextro Rye</span>
             </a>
           </div>
         </div>

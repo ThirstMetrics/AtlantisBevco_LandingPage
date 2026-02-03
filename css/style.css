@@ -23,6 +23,7 @@
 
   /* Layout */
   --max-width: 1200px;
+  --navbar-height: 72px;
   --padding-desktop: 24px;
   --padding-mobile: 16px;
 
@@ -157,8 +158,20 @@ p {
   left: 0;
   width: 100%;
   z-index: 1000;
-  background-color: var(--color-atlantis-blue);
+  background-color: transparent;
   padding: 0 var(--padding-desktop);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Solid navbar state (on scroll or non-homepage pages) */
+.navbar.navbar-scrolled,
+.navbar.navbar-solid {
+  background-color: var(--color-atlantis-blue);
+}
+
+/* Hidden navbar state (for catalog scroll) */
+.navbar.navbar-hidden {
+  transform: translateY(-100%);
 }
 
 .navbar-inner {
@@ -167,18 +180,39 @@ p {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 72px;
+  height: var(--navbar-height);
+}
+
+/* Navbar logo: graphic + text side by side */
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 100%;
 }
 
 .navbar-logo img {
-  height: 52px;
+  height: calc(var(--navbar-height) - 16px);
   width: auto;
+}
+
+.navbar-logo-text {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-white);
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+
+.navbar-logo:hover .navbar-logo-text {
+  color: var(--color-white);
 }
 
 .navbar-menu {
   display: flex;
   list-style: none;
-  gap: 28px;
+  gap: 24px;
   align-items: center;
 }
 
@@ -193,6 +227,23 @@ p {
 
 .navbar-menu a:hover {
   color: var(--color-aegean-gold);
+}
+
+/* Nav CTA buttons */
+.navbar-menu .nav-cta a {
+  display: inline-block;
+  padding: 8px 18px;
+  background-color: var(--color-aegean-gold);
+  color: var(--color-atlantis-blue);
+  font-weight: 600;
+  border-radius: 4px;
+  font-size: 13px;
+  letter-spacing: 0;
+}
+
+.navbar-menu .nav-cta a:hover {
+  background-color: #c99e3e;
+  color: var(--color-atlantis-blue);
 }
 
 /* Hamburger */
@@ -230,7 +281,7 @@ p {
 .mobile-menu {
   display: none;
   position: fixed;
-  top: 72px;
+  top: var(--navbar-height);
   left: 0;
   width: 100%;
   background-color: var(--color-atlantis-blue);
@@ -257,6 +308,17 @@ p {
   color: var(--color-aegean-gold);
 }
 
+.mobile-menu .mobile-cta a {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: var(--color-aegean-gold);
+  color: var(--color-atlantis-blue);
+  font-weight: 600;
+  border-radius: 4px;
+  border-bottom: none;
+  text-align: center;
+}
+
 /* ============================================
    HERO SECTION
    ============================================ */
@@ -269,7 +331,6 @@ p {
   justify-content: center;
   text-align: center;
   overflow: hidden;
-  margin-top: 72px;
 }
 
 .hero-bg {
@@ -868,7 +929,7 @@ p {
 .page-hero {
   background-color: var(--color-atlantis-blue);
   padding: 120px 0 80px;
-  margin-top: 72px;
+  margin-top: var(--navbar-height);
   text-align: center;
 }
 
@@ -934,45 +995,211 @@ p {
 }
 
 /* ============================================
+   BRAND DETAIL PAGE (Andre Petit etc.)
+   ============================================ */
+.brand-detail {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 60px;
+  align-items: start;
+}
+
+.brand-detail-logo {
+  text-align: center;
+  padding: 32px;
+  background: var(--color-slate-navy);
+  border-radius: 8px;
+}
+
+.brand-detail-logo img {
+  max-width: 200px;
+  margin: 0 auto;
+}
+
+.brand-detail-content h2 {
+  margin-bottom: 8px;
+}
+
+.brand-detail-content p {
+  margin-bottom: 16px;
+  color: var(--color-cool-gray);
+  font-size: 17px;
+  line-height: 1.8;
+}
+
+/* ============================================
    CATALOG PAGE
    ============================================ */
 .catalog-viewer {
-  margin-top: 72px;
-  padding: 32px 0;
-  min-height: calc(100vh - 72px);
+  margin-top: var(--navbar-height);
+  padding: 16px 0 0;
+  min-height: calc(100vh - var(--navbar-height));
   display: flex;
   flex-direction: column;
 }
 
 .catalog-header {
   text-align: center;
-  padding: 24px 0;
+  padding: 12px 0;
 }
 
 .catalog-header h1 {
-  margin-bottom: 8px;
+  margin-bottom: 4px;
+  font-size: clamp(24px, 3vw, 32px);
 }
 
 .catalog-embed {
   flex: 1;
   display: flex;
   justify-content: center;
-  padding: 0 var(--padding-desktop);
+  padding: 0;
 }
 
 .catalog-embed iframe,
 .catalog-embed embed,
 .catalog-embed object {
   width: 100%;
-  max-width: 960px;
-  height: 80vh;
-  border: 1px solid var(--color-light-gray);
-  border-radius: 4px;
+  max-width: none;
+  height: calc(100vh - 120px);
+  border: none;
+  border-top: 1px solid var(--color-light-gray);
 }
 
 .catalog-fallback {
   text-align: center;
   padding: 24px;
+}
+
+/* ============================================
+   AGE VERIFICATION GATE
+   ============================================ */
+.age-gate {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-atlantis-blue);
+}
+
+.age-gate-inner {
+  text-align: center;
+  max-width: 480px;
+  padding: 48px 32px;
+  background: var(--color-white);
+  border-radius: 8px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.3);
+}
+
+.age-gate-inner img {
+  height: 80px;
+  margin: 0 auto 24px;
+}
+
+.age-gate-inner h2 {
+  margin-bottom: 8px;
+  font-size: 28px;
+}
+
+.age-gate-inner p {
+  color: var(--color-cool-gray);
+  margin-bottom: 32px;
+  font-size: 16px;
+}
+
+.age-gate-buttons {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+}
+
+.age-gate-buttons .btn {
+  min-width: 140px;
+}
+
+.age-gate-deny {
+  background: transparent;
+  color: var(--color-cool-gray);
+  border: 1px solid var(--color-light-gray);
+}
+
+.age-gate-deny:hover {
+  background: var(--color-light-gray);
+  color: var(--color-slate-navy);
+}
+
+.age-gate-disclaimer {
+  margin-top: 24px;
+  font-size: 12px;
+  color: var(--color-cool-gray);
+}
+
+.age-gate.hidden {
+  display: none;
+}
+
+/* ============================================
+   COOKIE CONSENT BANNER
+   ============================================ */
+.cookie-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9000;
+  background: var(--color-slate-navy);
+  color: var(--color-white);
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  box-shadow: 0 -2px 12px rgba(0,0,0,0.15);
+}
+
+.cookie-banner p {
+  color: rgba(255,255,255,0.85);
+  font-size: 14px;
+  margin: 0;
+  max-width: 600px;
+}
+
+.cookie-banner a {
+  color: var(--color-aegean-gold);
+  text-decoration: underline;
+}
+
+.cookie-banner .btn {
+  padding: 8px 24px;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.cookie-banner .cookie-decline {
+  background: transparent;
+  color: rgba(255,255,255,0.7);
+  border: 1px solid rgba(255,255,255,0.3);
+  padding: 8px 20px;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  transition: all var(--transition-fast);
+}
+
+.cookie-banner .cookie-decline:hover {
+  background: rgba(255,255,255,0.1);
+  color: var(--color-white);
+}
+
+.cookie-banner.hidden {
+  display: none;
 }
 
 /* ============================================
@@ -1022,6 +1249,16 @@ p {
   .value-cards {
     grid-template-columns: 1fr;
   }
+
+  .brand-detail {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .brand-detail-logo {
+    max-width: 250px;
+    margin: 0 auto;
+  }
 }
 
 @media (max-width: 768px) {
@@ -1066,32 +1303,40 @@ p {
   .spotlight-content {
     padding: 40px 24px;
   }
+
+  .navbar-logo-text {
+    font-size: 15px;
+  }
 }
 
 @media (max-width: 480px) {
-  .navbar-inner {
-    height: 60px;
-  }
-
-  .navbar-logo img {
-    height: 40px;
+  :root {
+    --navbar-height: 60px;
   }
 
   .hero {
-    margin-top: 60px;
+    min-height: 100vh;
   }
 
   .page-hero {
-    margin-top: 60px;
     padding: 80px 0 60px;
-  }
-
-  .mobile-menu {
-    top: 60px;
   }
 
   .btn {
     padding: 12px 24px;
     font-size: 15px;
+  }
+
+  .navbar-logo-text {
+    font-size: 13px;
+  }
+
+  .age-gate-inner {
+    margin: 16px;
+    padding: 32px 20px;
+  }
+
+  .age-gate-buttons {
+    flex-direction: column;
   }
 }

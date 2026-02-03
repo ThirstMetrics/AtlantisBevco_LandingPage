@@ -4,16 +4,161 @@
 
 document.addEventListener('DOMContentLoaded', function () {
 
-  /* --- Mobile Menu Toggle --- */
-  const hamburger = document.querySelector('.hamburger');
-  const mobileMenu = document.querySelector('.mobile-menu');
+  /* ==========================================
+     AGE VERIFICATION GATE
+     ========================================== */
+  var ageGate = document.getElementById('age-gate');
+  var ageYes = document.getElementById('age-yes');
+  var ageNo = document.getElementById('age-no');
+
+  if (ageGate) {
+    // Check if already verified this session
+    if (sessionStorage.getItem('age-verified') === 'true') {
+      ageGate.classList.add('hidden');
+    } else {
+      // Prevent scrolling while gate is visible
+      document.body.style.overflow = 'hidden';
+    }
+
+    if (ageYes) {
+      ageYes.addEventListener('click', function () {
+        sessionStorage.setItem('age-verified', 'true');
+        ageGate.classList.add('hidden');
+        document.body.style.overflow = '';
+        // Show cookie banner after age gate is dismissed
+        showCookieBanner();
+      });
+    }
+
+    if (ageNo) {
+      ageNo.addEventListener('click', function () {
+        // Redirect to a generic safe page
+        window.location.href = 'https://www.responsibility.org/';
+      });
+    }
+  }
+
+  /* ==========================================
+     COOKIE CONSENT BANNER
+     ========================================== */
+  var cookieBanner = document.getElementById('cookie-banner');
+  var cookieAccept = document.getElementById('cookie-accept');
+  var cookieDecline = document.getElementById('cookie-decline');
+
+  function showCookieBanner() {
+    if (!cookieBanner) return;
+    var consent = localStorage.getItem('cookie-consent');
+    if (!consent) {
+      cookieBanner.classList.remove('hidden');
+    }
+  }
+
+  // Only show cookie banner if age gate is already verified
+  if (sessionStorage.getItem('age-verified') === 'true') {
+    showCookieBanner();
+  }
+
+  if (cookieAccept) {
+    cookieAccept.addEventListener('click', function () {
+      localStorage.setItem('cookie-consent', 'accepted');
+      cookieBanner.classList.add('hidden');
+      // Enable GA if it was deferred
+      enableAnalytics();
+    });
+  }
+
+  if (cookieDecline) {
+    cookieDecline.addEventListener('click', function () {
+      localStorage.setItem('cookie-consent', 'declined');
+      cookieBanner.classList.add('hidden');
+      disableAnalytics();
+    });
+  }
+
+  function enableAnalytics() {
+    // GA4 is loaded by default; this ensures it stays active
+    if (typeof gtag === 'function') {
+      gtag('consent', 'update', {
+        'analytics_storage': 'granted'
+      });
+    }
+  }
+
+  function disableAnalytics() {
+    if (typeof gtag === 'function') {
+      gtag('consent', 'update', {
+        'analytics_storage': 'denied'
+      });
+    }
+  }
+
+  // Apply stored consent on load
+  var storedConsent = localStorage.getItem('cookie-consent');
+  if (storedConsent === 'declined') {
+    disableAnalytics();
+  }
+
+  /* ==========================================
+     NAVBAR - SCROLL BEHAVIOR
+     ========================================== */
+  var navbar = document.querySelector('.navbar');
+  var isCatalogPage = document.body.getAttribute('data-page') === 'catalog';
+  var isHomePage = document.querySelector('.hero') !== null;
+
+  // Catalog page: auto-hide navbar on scroll
+  if (isCatalogPage && navbar) {
+    var lastScrollY = window.scrollY;
+    var scrollThreshold = 5;
+
+    window.addEventListener('scroll', function () {
+      var currentScrollY = window.scrollY;
+
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        // Scrolling down - hide navbar
+        navbar.classList.add('navbar-hidden');
+      } else if (currentScrollY < lastScrollY - scrollThreshold) {
+        // Scrolling up - show navbar
+        navbar.classList.remove('navbar-hidden');
+      }
+
+      lastScrollY = currentScrollY;
+    }, { passive: true });
+  }
+
+  // Homepage: transparent to solid on scroll
+  if (isHomePage && navbar) {
+    function handleNavbarScroll() {
+      if (window.scrollY > 60) {
+        navbar.classList.add('navbar-scrolled');
+      } else {
+        navbar.classList.remove('navbar-scrolled');
+      }
+    }
+
+    window.addEventListener('scroll', handleNavbarScroll, { passive: true });
+    // Run once on load in case page is already scrolled
+    handleNavbarScroll();
+  }
+
+  /* ==========================================
+     MOBILE MENU TOGGLE
+     ========================================== */
+  var hamburger = document.querySelector('.hamburger');
+  var mobileMenu = document.querySelector('.mobile-menu');
 
   if (hamburger && mobileMenu) {
     hamburger.addEventListener('click', function () {
-      const isActive = hamburger.classList.toggle('active');
+      var isActive = hamburger.classList.toggle('active');
       mobileMenu.classList.toggle('active');
       hamburger.setAttribute('aria-expanded', isActive);
       document.body.style.overflow = isActive ? 'hidden' : '';
+
+      // When mobile menu opens, ensure navbar is solid
+      if (isActive) {
+        navbar.classList.add('navbar-scrolled');
+      } else if (isHomePage && window.scrollY <= 60) {
+        navbar.classList.remove('navbar-scrolled');
+      }
     });
 
     // Close mobile menu on link click
@@ -27,8 +172,10 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  /* --- Hero Rotating Text --- */
-  const rotatingPhrases = [
+  /* ==========================================
+     HERO ROTATING TEXT
+     ========================================== */
+  var rotatingPhrases = [
     'Exceptional Spirits',
     'Fine Wines',
     'Craft Brands',
@@ -38,9 +185,9 @@ document.addEventListener('DOMContentLoaded', function () {
     'Vintage Bordeaux'
   ];
 
-  const rotatingEl = document.querySelector('.hero-rotating-text');
+  var rotatingEl = document.querySelector('.hero-rotating-text');
   if (rotatingEl) {
-    let currentIndex = 0;
+    var currentIndex = 0;
 
     function rotateText() {
       rotatingEl.classList.remove('fade-in');
@@ -57,7 +204,9 @@ document.addEventListener('DOMContentLoaded', function () {
     setInterval(rotateText, 3000);
   }
 
-  /* --- Swiper Brand Scroller --- */
+  /* ==========================================
+     SWIPER BRAND SCROLLER
+     ========================================== */
   if (typeof Swiper !== 'undefined' && document.querySelector('.brand-scroller')) {
     new Swiper('.brand-scroller', {
       slidesPerView: 2,
@@ -89,11 +238,13 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  /* --- Fade-in on Scroll (Intersection Observer) --- */
-  const fadeElements = document.querySelectorAll('.fade-in');
+  /* ==========================================
+     FADE-IN ON SCROLL (Intersection Observer)
+     ========================================== */
+  var fadeElements = document.querySelectorAll('.fade-in');
 
   if (fadeElements.length > 0 && 'IntersectionObserver' in window) {
-    const observer = new IntersectionObserver(function (entries) {
+    var observer = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
@@ -109,13 +260,14 @@ document.addEventListener('DOMContentLoaded', function () {
       observer.observe(el);
     });
   } else {
-    // Fallback: just show everything
     fadeElements.forEach(function (el) {
       el.classList.add('visible');
     });
   }
 
-  /* --- Smooth Scroll for Anchor Links --- */
+  /* ==========================================
+     SMOOTH SCROLL FOR ANCHOR LINKS
+     ========================================== */
   document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
     anchor.addEventListener('click', function (e) {
       var targetId = this.getAttribute('href');
@@ -124,7 +276,7 @@ document.addEventListener('DOMContentLoaded', function () {
       var target = document.querySelector(targetId);
       if (target) {
         e.preventDefault();
-        var navHeight = document.querySelector('.navbar') ? document.querySelector('.navbar').offsetHeight : 0;
+        var navHeight = navbar ? navbar.offsetHeight : 0;
         var targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navHeight;
 
         window.scrollTo({
@@ -135,7 +287,9 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  /* --- Contact Form Handling (mailto) --- */
+  /* ==========================================
+     CONTACT FORM HANDLING (mailto)
+     ========================================== */
   var contactForm = document.querySelector('.contact-form');
   if (contactForm) {
     contactForm.addEventListener('submit', function (e) {
