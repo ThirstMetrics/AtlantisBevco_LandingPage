@@ -1,0 +1,3 @@
+# Redirect /cataloglv to /cataloglv.html
+RewriteEngine On
+RewriteRule ^cataloglv$ /cataloglv.html [R=301,L]
