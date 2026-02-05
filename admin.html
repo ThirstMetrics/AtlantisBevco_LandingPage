@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Admin | Atlantis Bevco</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --color-atlantis-blue: #0B4F9F;
+      --color-white: #FFFFFF;
+      --color-aegean-gold: #E0B44C;
+      --color-slate-navy: #1F2A37;
+      --color-light-gray: #E5E7EB;
+      --color-cool-gray: #6B7280;
+      --font-sans: 'Inter', sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: var(--color-slate-navy);
+      font-family: var(--font-sans);
+      padding: 40px 20px;
+    }
+
+    .admin-panel {
+      background: var(--color-white);
+      border-radius: 12px;
+      padding: 48px;
+      max-width: 400px;
+      width: 100%;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .admin-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--color-slate-navy);
+      margin-bottom: 8px;
+      text-align: center;
+    }
+
+    .admin-subtitle {
+      font-size: 0.875rem;
+      color: var(--color-cool-gray);
+      margin-bottom: 32px;
+      text-align: center;
+    }
+
+    .version-toggle {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .version-option {
+      position: relative;
+    }
+
+    .version-option input {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .version-option label {
+      display: flex;
+      align-items: center;
+      padding: 16px 20px;
+      background: var(--color-light-gray);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      border: 2px solid transparent;
+    }
+
+    .version-option label:hover {
+      background: #D1D5DB;
+    }
+
+    .version-option input:checked + label {
+      background: var(--color-atlantis-blue);
+      color: var(--color-white);
+      border-color: var(--color-aegean-gold);
+    }
+
+    .version-option .radio-indicator {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 2px solid var(--color-cool-gray);
+      margin-right: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .version-option input:checked + label .radio-indicator {
+      border-color: var(--color-aegean-gold);
+      background: var(--color-aegean-gold);
+    }
+
+    .version-option input:checked + label .radio-indicator::after {
+      content: '';
+      width: 8px;
+      height: 8px;
+      background: var(--color-atlantis-blue);
+      border-radius: 50%;
+    }
+
+    .version-label-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .version-name {
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    .version-desc {
+      font-size: 0.75rem;
+      opacity: 0.7;
+      margin-top: 2px;
+    }
+
+    .current-status {
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px solid var(--color-light-gray);
+      text-align: center;
+    }
+
+    .current-status-label {
+      font-size: 0.75rem;
+      color: var(--color-cool-gray);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+    }
+
+    .current-status-value {
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: var(--color-atlantis-blue);
+    }
+
+    .preview-link {
+      display: block;
+      margin-top: 24px;
+      text-align: center;
+      font-size: 0.875rem;
+      color: var(--color-atlantis-blue);
+      text-decoration: none;
+    }
+
+    .preview-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="admin-panel">
+    <h1 class="admin-title">Site Version Control</h1>
+    <p class="admin-subtitle">Select which version is live on the website</p>
+
+    <div class="version-toggle">
+      <div class="version-option">
+        <input type="radio" name="site-version" id="version-coming-soon" value="coming-soon">
+        <label for="version-coming-soon">
+          <span class="radio-indicator"></span>
+          <span class="version-label-text">
+            <span class="version-name">Coming Soon</span>
+            <span class="version-desc">Placeholder page</span>
+          </span>
+        </label>
+      </div>
+
+      <div class="version-option">
+        <input type="radio" name="site-version" id="version-v1" value="v1">
+        <label for="version-v1">
+          <span class="radio-indicator"></span>
+          <span class="version-label-text">
+            <span class="version-name">V1 - Minimal</span>
+            <span class="version-desc">Single page, logo, CTAs</span>
+          </span>
+        </label>
+      </div>
+
+      <div class="version-option">
+        <input type="radio" name="site-version" id="version-v2" value="v2">
+        <label for="version-v2">
+          <span class="radio-indicator"></span>
+          <span class="version-label-text">
+            <span class="version-name">V2 - Full Site</span>
+            <span class="version-desc">Complete website with all sections</span>
+          </span>
+        </label>
+      </div>
+    </div>
+
+    <div class="current-status">
+      <div class="current-status-label">Currently Live</div>
+      <div class="current-status-value" id="current-version-display">V1 - Minimal</div>
+    </div>
+
+    <a href="index.html" class="preview-link" id="preview-link">View Live Site</a>
+  </div>
+
+  <script>
+    (function() {
+      var versionMap = {
+        'coming-soon': 'Coming Soon',
+        'v1': 'V1 - Minimal',
+        'v2': 'V2 - Full Site'
+      };
+
+      // Get current version from localStorage (default to v1)
+      var currentVersion = localStorage.getItem('atlantis-site-version') || 'v1';
+
+      // Set the radio button
+      var radio = document.getElementById('version-' + currentVersion);
+      if (radio) {
+        radio.checked = true;
+      }
+
+      // Update display
+      var display = document.getElementById('current-version-display');
+      display.textContent = versionMap[currentVersion] || 'V1 - Minimal';
+
+      // Listen for changes
+      var radios = document.querySelectorAll('input[name="site-version"]');
+      radios.forEach(function(r) {
+        r.addEventListener('change', function() {
+          var newVersion = this.value;
+          localStorage.setItem('atlantis-site-version', newVersion);
+          display.textContent = versionMap[newVersion];
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

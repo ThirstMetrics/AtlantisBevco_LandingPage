@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Atlantis Bevco Distribution - Premium beverage distribution across Las Vegas and Northern Nevada since 2015.">
+  <title>Atlantis Bevco Distribution | Las Vegas, Nevada</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Google Analytics GA4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+
+  <style>
+    /* V1 Specific Styles - Single Page Layout */
+    .v1-page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: var(--color-atlantis-blue);
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .v1-logo {
+      max-width: 180px;
+      margin-bottom: 40px;
+    }
+
+    .v1-tagline {
+      font-family: var(--font-serif);
+      font-size: 2rem;
+      font-weight: 400;
+      color: var(--color-white);
+      margin-bottom: 16px;
+      letter-spacing: 0.02em;
+    }
+
+    .v1-subtitle {
+      font-family: var(--font-sans);
+      font-size: 1.125rem;
+      color: rgba(255, 255, 255, 0.85);
+      margin-bottom: 48px;
+    }
+
+    .v1-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+
+    .v1-buttons .btn {
+      min-width: 220px;
+    }
+
+    .v1-catalog-link {
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .v1-catalog-link a {
+      color: var(--color-aegean-gold);
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+
+    .v1-catalog-link a:hover {
+      color: var(--color-white);
+    }
+
+    @media (max-width: 480px) {
+      .v1-tagline {
+        font-size: 1.5rem;
+      }
+      .v1-subtitle {
+        font-size: 1rem;
+      }
+      .v1-logo {
+        max-width: 140px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========== AGE VERIFICATION GATE ========== -->
+  <div id="age-gate" class="age-gate">
+    <div class="age-gate-inner">
+      <img src="images/logo-graphic.png" alt="Atlantis Bevco">
+      <h2>Age Verification</h2>
+      <p>You must be 21 years of age or older to enter this site.</p>
+      <div class="age-gate-buttons">
+        <button id="age-yes" class="btn btn-primary">I Am 21 or Older</button>
+        <button id="age-no" class="btn age-gate-deny">I Am Under 21</button>
+      </div>
+      <p class="age-gate-disclaimer">By entering this site you agree that you are of legal drinking age in your jurisdiction.</p>
+    </div>
+  </div>
+
+  <!-- ========== COOKIE CONSENT ========== -->
+  <div id="cookie-banner" class="cookie-banner hidden">
+    <p>We use cookies to improve your experience and analyze site traffic. By continuing to use this site, you consent to our use of cookies.</p>
+    <button id="cookie-accept" class="btn btn-primary">Accept</button>
+    <button id="cookie-decline" class="cookie-decline">Decline</button>
+  </div>
+
+  <!-- ========== V1 SINGLE PAGE ========== -->
+  <main class="v1-page">
+    <img src="images/logo.png" alt="Atlantis Bevco Distribution" class="v1-logo">
+
+    <h1 class="v1-tagline">Atlantis Bevco</h1>
+    <p class="v1-subtitle">Serving Las Vegas and Northern Nevada since 2015</p>
+
+    <div class="v1-buttons">
+      <a href="become-a-supplier.html" class="btn btn-primary">Become a Supplier</a>
+      <a href="become-a-customer.html" class="btn btn-secondary-light">Become a Customer</a>
+    </div>
+
+    <p class="v1-catalog-link">
+      <a href="cataloglv.html">View Our Catalog</a>
+    </p>
+  </main>
+
+  <!-- Main JS (for age gate and cookie consent) -->
+  <script src="js/main.js"></script>
+</body>
+</html>
