@@ -22,6 +22,8 @@
       --color-slate-navy: #1F2A37;
       --color-light-gray: #E5E7EB;
       --color-cool-gray: #6B7280;
+      --color-success: #059669;
+      --color-error: #DC2626;
       --font-sans: 'Inter', sans-serif;
     }
 
@@ -42,13 +44,95 @@
       padding: 40px 20px;
     }
 
-    .admin-panel {
+    /* ---- Login Gate ---- */
+    .login-gate {
       background: var(--color-white);
       border-radius: 12px;
       padding: 48px;
       max-width: 400px;
       width: 100%;
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .login-gate .admin-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--color-slate-navy);
+      margin-bottom: 8px;
+      text-align: center;
+    }
+
+    .login-gate .admin-subtitle {
+      font-size: 0.875rem;
+      color: var(--color-cool-gray);
+      margin-bottom: 32px;
+      text-align: center;
+    }
+
+    .login-form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .login-form input[type="password"] {
+      width: 100%;
+      padding: 14px 16px;
+      border: 2px solid var(--color-light-gray);
+      border-radius: 8px;
+      font-size: 1rem;
+      font-family: var(--font-sans);
+      outline: none;
+      transition: border-color 0.15s ease;
+    }
+
+    .login-form input[type="password"]:focus {
+      border-color: var(--color-atlantis-blue);
+    }
+
+    .login-btn {
+      width: 100%;
+      padding: 14px;
+      background: var(--color-atlantis-blue);
+      color: var(--color-white);
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      font-family: var(--font-sans);
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+
+    .login-btn:hover {
+      background: #093f7f;
+    }
+
+    .login-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .login-error {
+      color: var(--color-error);
+      font-size: 0.875rem;
+      text-align: center;
+      display: none;
+    }
+
+    .login-error.visible {
+      display: block;
+    }
+
+    /* ---- Admin Panel ---- */
+    .admin-panel {
+      background: var(--color-white);
+      border-radius: 12px;
+      padding: 48px;
+      max-width: 480px;
+      width: 100%;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      display: none;
     }
 
     .admin-title {
@@ -177,11 +261,249 @@
     .preview-link:hover {
       text-decoration: underline;
     }
+
+    /* ---- Catalog Management Section ---- */
+    .catalog-section {
+      margin-top: 32px;
+      padding-top: 32px;
+      border-top: 2px solid var(--color-light-gray);
+    }
+
+    .catalog-section-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--color-slate-navy);
+      margin-bottom: 4px;
+      text-align: center;
+    }
+
+    .catalog-section-subtitle {
+      font-size: 0.8125rem;
+      color: var(--color-cool-gray);
+      margin-bottom: 24px;
+      text-align: center;
+    }
+
+    .catalog-info {
+      background: #F9FAFB;
+      border: 1px solid var(--color-light-gray);
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin-bottom: 20px;
+    }
+
+    .catalog-info-label {
+      font-size: 0.6875rem;
+      color: var(--color-cool-gray);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 6px;
+    }
+
+    .catalog-info-value {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--color-slate-navy);
+    }
+
+    .catalog-info-value.no-file {
+      color: var(--color-cool-gray);
+      font-style: italic;
+    }
+
+    .upload-area {
+      border: 2px dashed var(--color-light-gray);
+      border-radius: 8px;
+      padding: 24px;
+      text-align: center;
+      margin-bottom: 16px;
+      transition: border-color 0.15s ease, background 0.15s ease;
+    }
+
+    .upload-area.dragover {
+      border-color: var(--color-atlantis-blue);
+      background: #EFF6FF;
+    }
+
+    .upload-area-icon {
+      font-size: 2rem;
+      margin-bottom: 8px;
+    }
+
+    .upload-area-text {
+      font-size: 0.875rem;
+      color: var(--color-cool-gray);
+      margin-bottom: 12px;
+    }
+
+    .upload-area-text strong {
+      color: var(--color-atlantis-blue);
+    }
+
+    .file-input-wrapper {
+      position: relative;
+      display: inline-block;
+    }
+
+    .file-input-wrapper input[type="file"] {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .file-input-btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background: var(--color-light-gray);
+      color: var(--color-slate-navy);
+      border-radius: 6px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+
+    .file-input-btn:hover {
+      background: #D1D5DB;
+    }
+
+    .selected-file {
+      font-size: 0.8125rem;
+      color: var(--color-atlantis-blue);
+      font-weight: 500;
+      margin-top: 12px;
+      display: none;
+    }
+
+    .selected-file.visible {
+      display: block;
+    }
+
+    .upload-btn {
+      width: 100%;
+      padding: 14px;
+      background: var(--color-aegean-gold);
+      color: var(--color-slate-navy);
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      font-family: var(--font-sans);
+      cursor: pointer;
+      transition: background 0.15s ease;
+      display: none;
+    }
+
+    .upload-btn.visible {
+      display: block;
+    }
+
+    .upload-btn:hover {
+      background: #c9a043;
+    }
+
+    .upload-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    /* Progress bar */
+    .progress-container {
+      margin-top: 16px;
+      display: none;
+    }
+
+    .progress-container.visible {
+      display: block;
+    }
+
+    .progress-bar-bg {
+      width: 100%;
+      height: 8px;
+      background: var(--color-light-gray);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--color-atlantis-blue);
+      border-radius: 4px;
+      transition: width 0.2s ease;
+    }
+
+    .progress-text {
+      font-size: 0.75rem;
+      color: var(--color-cool-gray);
+      margin-top: 6px;
+      text-align: center;
+    }
+
+    /* Status messages */
+    .upload-status {
+      margin-top: 16px;
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      text-align: center;
+      display: none;
+    }
+
+    .upload-status.visible {
+      display: block;
+    }
+
+    .upload-status.success {
+      background: #ECFDF5;
+      color: var(--color-success);
+      border: 1px solid #A7F3D0;
+    }
+
+    .upload-status.error {
+      background: #FEF2F2;
+      color: var(--color-error);
+      border: 1px solid #FECACA;
+    }
+
+    /* Logout link */
+    .logout-link {
+      display: block;
+      margin-top: 24px;
+      text-align: center;
+      font-size: 0.8125rem;
+      color: var(--color-cool-gray);
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .logout-link:hover {
+      color: var(--color-error);
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
 
-  <div class="admin-panel">
+  <!-- ====== Login Gate ====== -->
+  <div class="login-gate" id="login-gate">
+    <h1 class="admin-title">Admin Login</h1>
+    <p class="admin-subtitle">Enter the admin password to continue</p>
+
+    <form class="login-form" id="login-form" onsubmit="return false;">
+      <input type="password" id="login-password" placeholder="Password" autocomplete="current-password" required>
+      <button type="submit" class="login-btn" id="login-btn">Login</button>
+      <p class="login-error" id="login-error"></p>
+    </form>
+  </div>
+
+  <!-- ====== Admin Panel (hidden until authenticated) ====== -->
+  <div class="admin-panel" id="admin-panel">
     <h1 class="admin-title">Site Version Control</h1>
     <p class="admin-subtitle">Select which version is live on the website</p>
 
@@ -226,38 +548,383 @@
     </div>
 
     <a href="index.html" class="preview-link" id="preview-link">View Live Site</a>
+
+    <!-- ====== Catalog Management Section ====== -->
+    <div class="catalog-section">
+      <h2 class="catalog-section-title">Catalog Management</h2>
+      <p class="catalog-section-subtitle">Upload a new PDF to replace the live catalog</p>
+
+      <div class="catalog-info">
+        <div class="catalog-info-label">Current Catalog</div>
+        <div class="catalog-info-value" id="catalog-info">Loading...</div>
+      </div>
+
+      <div class="upload-area" id="upload-area">
+        <div class="upload-area-icon">&#128196;</div>
+        <p class="upload-area-text">Drag &amp; drop a PDF here, or</p>
+        <div class="file-input-wrapper">
+          <span class="file-input-btn">Choose PDF File</span>
+          <input type="file" id="catalog-file" accept=".pdf,application/pdf">
+        </div>
+        <p class="selected-file" id="selected-file"></p>
+      </div>
+
+      <button class="upload-btn" id="upload-btn">Upload &amp; Replace Catalog</button>
+
+      <div class="progress-container" id="progress-container">
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="progress-bar"></div>
+        </div>
+        <p class="progress-text" id="progress-text">Uploading... 0%</p>
+      </div>
+
+      <div class="upload-status" id="upload-status"></div>
+    </div>
+
+    <a class="logout-link" id="logout-link">Logout</a>
   </div>
 
   <script>
     (function() {
+      // ============================================
+      // Elements
+      // ============================================
+      var loginGate = document.getElementById('login-gate');
+      var loginForm = document.getElementById('login-form');
+      var loginPassword = document.getElementById('login-password');
+      var loginBtn = document.getElementById('login-btn');
+      var loginError = document.getElementById('login-error');
+
+      var adminPanel = document.getElementById('admin-panel');
+      var logoutLink = document.getElementById('logout-link');
+
+      var catalogInfo = document.getElementById('catalog-info');
+      var uploadArea = document.getElementById('upload-area');
+      var catalogFile = document.getElementById('catalog-file');
+      var selectedFile = document.getElementById('selected-file');
+      var uploadBtn = document.getElementById('upload-btn');
+      var progressContainer = document.getElementById('progress-container');
+      var progressBar = document.getElementById('progress-bar');
+      var progressText = document.getElementById('progress-text');
+      var uploadStatus = document.getElementById('upload-status');
+
+      var adminToken = sessionStorage.getItem('admin-token') || '';
+
+      // ============================================
+      // Version Control (existing functionality)
+      // ============================================
       var versionMap = {
         'coming-soon': 'Coming Soon',
         'v1': 'V1 - Minimal',
         'v2': 'V2 - Full Site'
       };
 
-      // Get current version from localStorage (default to v1)
-      var currentVersion = localStorage.getItem('atlantis-site-version') || 'v1';
+      function initVersionControl() {
+        var currentVersion = localStorage.getItem('atlantis-site-version') || 'v1';
+        var radio = document.getElementById('version-' + currentVersion);
+        if (radio) radio.checked = true;
 
-      // Set the radio button
-      var radio = document.getElementById('version-' + currentVersion);
-      if (radio) {
-        radio.checked = true;
+        var display = document.getElementById('current-version-display');
+        display.textContent = versionMap[currentVersion] || 'V1 - Minimal';
+
+        var radios = document.querySelectorAll('input[name="site-version"]');
+        radios.forEach(function(r) {
+          r.addEventListener('change', function() {
+            localStorage.setItem('atlantis-site-version', this.value);
+            display.textContent = versionMap[this.value];
+          });
+        });
       }
 
-      // Update display
-      var display = document.getElementById('current-version-display');
-      display.textContent = versionMap[currentVersion] || 'V1 - Minimal';
+      // ============================================
+      // Authentication
+      // ============================================
+      function showLogin() {
+        loginGate.style.display = 'block';
+        adminPanel.style.display = 'none';
+        loginPassword.value = '';
+        loginError.classList.remove('visible');
+      }
 
-      // Listen for changes
-      var radios = document.querySelectorAll('input[name="site-version"]');
-      radios.forEach(function(r) {
-        r.addEventListener('change', function() {
-          var newVersion = this.value;
-          localStorage.setItem('atlantis-site-version', newVersion);
-          display.textContent = versionMap[newVersion];
-        });
+      function showAdmin() {
+        loginGate.style.display = 'none';
+        adminPanel.style.display = 'block';
+        initVersionControl();
+        loadCatalogStatus();
+      }
+
+      function doLogin() {
+        var password = loginPassword.value.trim();
+        if (!password) {
+          showError('Please enter a password.');
+          return;
+        }
+
+        loginBtn.disabled = true;
+        loginBtn.textContent = 'Logging in...';
+        loginError.classList.remove('visible');
+
+        var formData = new FormData();
+        formData.append('action', 'login');
+        formData.append('password', password);
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'admin-upload.php', true);
+        xhr.onload = function() {
+          loginBtn.disabled = false;
+          loginBtn.textContent = 'Login';
+
+          try {
+            var resp = JSON.parse(xhr.responseText);
+            if (resp.success) {
+              adminToken = resp.token;
+              sessionStorage.setItem('admin-token', adminToken);
+              showAdmin();
+            } else {
+              showError(resp.error || 'Login failed.');
+            }
+          } catch (e) {
+            showError('Server error. Please try again.');
+          }
+        };
+        xhr.onerror = function() {
+          loginBtn.disabled = false;
+          loginBtn.textContent = 'Login';
+          showError('Connection error. Please try again.');
+        };
+        xhr.send(formData);
+      }
+
+      function showError(msg) {
+        loginError.textContent = msg;
+        loginError.classList.add('visible');
+      }
+
+      loginForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        doLogin();
       });
+
+      // ============================================
+      // Session Check on Page Load
+      // ============================================
+      function checkExistingSession() {
+        if (!adminToken) {
+          showLogin();
+          return;
+        }
+
+        // Validate the existing token with a status call
+        var formData = new FormData();
+        formData.append('action', 'status');
+        formData.append('token', adminToken);
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'admin-upload.php', true);
+        xhr.onload = function() {
+          if (xhr.status === 401) {
+            // Token expired/invalid
+            sessionStorage.removeItem('admin-token');
+            adminToken = '';
+            showLogin();
+          } else {
+            showAdmin();
+          }
+        };
+        xhr.onerror = function() {
+          showLogin();
+        };
+        xhr.send(formData);
+      }
+
+      // ============================================
+      // Catalog Status
+      // ============================================
+      function loadCatalogStatus() {
+        var formData = new FormData();
+        formData.append('action', 'status');
+        formData.append('token', adminToken);
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'admin-upload.php', true);
+        xhr.onload = function() {
+          try {
+            var resp = JSON.parse(xhr.responseText);
+            if (resp.success && resp.exists) {
+              catalogInfo.textContent = 'Master_Portfolio.pdf (' + resp.size_formatted + ') — Updated ' + resp.modified;
+              catalogInfo.classList.remove('no-file');
+            } else if (resp.success) {
+              catalogInfo.textContent = 'No catalog uploaded yet';
+              catalogInfo.classList.add('no-file');
+            }
+          } catch (e) {
+            catalogInfo.textContent = 'Could not load catalog info';
+            catalogInfo.classList.add('no-file');
+          }
+        };
+        xhr.onerror = function() {
+          catalogInfo.textContent = 'Could not connect to server';
+          catalogInfo.classList.add('no-file');
+        };
+        xhr.send(formData);
+      }
+
+      // ============================================
+      // File Selection
+      // ============================================
+      catalogFile.addEventListener('change', function() {
+        var file = this.files[0];
+        if (file) {
+          // Client-side validation
+          if (!file.name.toLowerCase().endsWith('.pdf')) {
+            alert('Please select a PDF file.');
+            this.value = '';
+            return;
+          }
+          if (file.size > 50 * 1024 * 1024) {
+            alert('File is too large. Maximum size is 50MB.');
+            this.value = '';
+            return;
+          }
+
+          selectedFile.textContent = file.name + ' (' + formatSize(file.size) + ')';
+          selectedFile.classList.add('visible');
+          uploadBtn.classList.add('visible');
+        } else {
+          selectedFile.classList.remove('visible');
+          uploadBtn.classList.remove('visible');
+        }
+      });
+
+      // Drag and drop
+      uploadArea.addEventListener('dragover', function(e) {
+        e.preventDefault();
+        uploadArea.classList.add('dragover');
+      });
+
+      uploadArea.addEventListener('dragleave', function(e) {
+        e.preventDefault();
+        uploadArea.classList.remove('dragover');
+      });
+
+      uploadArea.addEventListener('drop', function(e) {
+        e.preventDefault();
+        uploadArea.classList.remove('dragover');
+
+        var files = e.dataTransfer.files;
+        if (files.length > 0) {
+          catalogFile.files = files;
+          catalogFile.dispatchEvent(new Event('change'));
+        }
+      });
+
+      // ============================================
+      // File Upload
+      // ============================================
+      uploadBtn.addEventListener('click', function() {
+        var file = catalogFile.files[0];
+        if (!file) return;
+
+        if (!confirm('This will replace the current live catalog. Continue?')) return;
+
+        uploadBtn.disabled = true;
+        uploadBtn.textContent = 'Uploading...';
+        uploadStatus.classList.remove('visible', 'success', 'error');
+        progressContainer.classList.add('visible');
+        progressBar.style.width = '0%';
+        progressText.textContent = 'Uploading... 0%';
+
+        var formData = new FormData();
+        formData.append('action', 'upload');
+        formData.append('token', adminToken);
+        formData.append('catalog_pdf', file);
+
+        var xhr = new XMLHttpRequest();
+
+        xhr.upload.addEventListener('progress', function(e) {
+          if (e.lengthComputable) {
+            var pct = Math.round((e.loaded / e.total) * 100);
+            progressBar.style.width = pct + '%';
+            progressText.textContent = 'Uploading... ' + pct + '%';
+          }
+        });
+
+        xhr.onload = function() {
+          uploadBtn.disabled = false;
+          uploadBtn.textContent = 'Upload & Replace Catalog';
+          progressContainer.classList.remove('visible');
+
+          if (xhr.status === 401) {
+            // Session expired
+            sessionStorage.removeItem('admin-token');
+            adminToken = '';
+            showLogin();
+            return;
+          }
+
+          try {
+            var resp = JSON.parse(xhr.responseText);
+            if (resp.success) {
+              showUploadStatus('success', resp.message);
+              loadCatalogStatus();
+              // Reset file input
+              catalogFile.value = '';
+              selectedFile.classList.remove('visible');
+              uploadBtn.classList.remove('visible');
+            } else {
+              showUploadStatus('error', resp.error || 'Upload failed.');
+            }
+          } catch (e) {
+            showUploadStatus('error', 'Server error. Please try again.');
+          }
+        };
+
+        xhr.onerror = function() {
+          uploadBtn.disabled = false;
+          uploadBtn.textContent = 'Upload & Replace Catalog';
+          progressContainer.classList.remove('visible');
+          showUploadStatus('error', 'Connection error. Please try again.');
+        };
+
+        xhr.open('POST', 'admin-upload.php', true);
+        xhr.send(formData);
+      });
+
+      function showUploadStatus(type, msg) {
+        uploadStatus.textContent = msg;
+        uploadStatus.className = 'upload-status visible ' + type;
+      }
+
+      // ============================================
+      // Logout
+      // ============================================
+      logoutLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        var formData = new FormData();
+        formData.append('action', 'logout');
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'admin-upload.php', true);
+        xhr.send(formData);
+
+        sessionStorage.removeItem('admin-token');
+        adminToken = '';
+        showLogin();
+      });
+
+      // ============================================
+      // Helpers
+      // ============================================
+      function formatSize(bytes) {
+        if (bytes >= 1048576) return (bytes / 1048576).toFixed(1) + ' MB';
+        if (bytes >= 1024) return (bytes / 1024).toFixed(1) + ' KB';
+        return bytes + ' bytes';
+      }
+
+      // ============================================
+      // Initialize
+      // ============================================
+      checkExistingSession();
+
     })();
   </script>
 </body>
